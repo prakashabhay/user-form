@@ -1,0 +1,15 @@
+/* header */
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #EBF0FA;
+    color: #fff;
+    width: 100%;
+    height: 70px;
+}
+
+
+.logo{
+    margin-left: 10px;
+    height: 50%;
+}
