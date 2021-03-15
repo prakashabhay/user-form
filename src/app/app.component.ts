@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
-
+import { userDetails } from './utlity/modal';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +12,12 @@ export class AppComponent {
   visibleSection: any;
   submitted:boolean = false;
   maskedSectionOriginal: string = "";
-  userDetails: any = {};
+  userDetails: userDetails = {
+    name:'',
+    email:'',
+    phone:'',
+    personalNumber:''
+  };
   registerForm:FormGroup;
   showMessage:boolean=false;
 
