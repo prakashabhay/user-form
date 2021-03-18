@@ -8,8 +8,7 @@
                 <input
                   type="text"
                   name="name"
-                  placeholder="Enter name"
-                  [(ngModel)]="userDetails.name" 
+                  placeholder="Enter name" 
                   formControlName="name" 
                   [ngClass]="{ 'is-invalid': submitted && f.name.errors }" 
                   required
@@ -24,7 +23,6 @@
                   type="email"
                   name="email"
                   placeholder="Enter email"
-                  [(ngModel)]="userDetails.email" 
                   formControlName="email"  
                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }" 
                   required
@@ -39,7 +37,6 @@
                   type="text"
                   name="phone"
                   placeholder="Enter phone"
-                  [(ngModel)]="userDetails.phone" 
                   formControlName="phoneNumber"
                   [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" 
                   required
@@ -54,11 +51,11 @@
                   type="text"
                   name="personal_number"
                   placeholder="yyyy-mm-dd-xxxx"
-                  [(ngModel)]="userDetails.personalNumber" 
-                  formControlName="personalNumber" 
-                  (keyup)="personalNumberInput($event)"
+                  [value]="personalNumb | maskpersonalnumber"
+                  formControlName="personalNumber"
                   [ngClass]="{ 'is-invalid': submitted && f.personalNumber.errors }" 
                   required
+                  (change)="changePersonalNumber()"
                 />
                 <div class="invalid-text" *ngIf="submitted && f.personalNumber.errors">
                   Enter valid personal number

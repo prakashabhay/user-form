@@ -7,11 +7,13 @@ import {DialogModule} from 'primeng/dialog';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { MaskpersonalnumberPipe } from './maskpersonalnumber.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    MaskpersonalnumberPipe
   ],
   imports: [
     BrowserModule,

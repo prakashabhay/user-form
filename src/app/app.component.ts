@@ -1,26 +1,17 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
 import { userDetails } from './utlity/modal';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ssnNumber: string;
-  maskedSection: any;
-  visibleSection: any;
+  personalNumb:string = '';
   submitted:boolean = false;
-  maskedSectionOriginal: string = "";
-  userDetails: userDetails = {
-    name:'',
-    email:'',
-    phone:'',
-    personalNumber:''
-  };
   registerForm:FormGroup;
   showMessage:boolean=false;
-
   constructor(private formBuilder: FormBuilder){
     this.registerForm = this.formBuilder.group({
       phoneNumber: ['', [ Validators.required,
@@ -33,11 +24,16 @@ export class AppComponent {
   }
   get f() { return this.registerForm.controls; }
   onSubmit():void {
+    console.log(this.registerForm.value)
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
    }
   this.showMessage = true;
+  }
+  changePersonalNumber(){
+   let formValue = {...this.registerForm};
+   this.personalNumb = JSON.parse(JSON.stringify(formValue.value['personalNumber']));
   }
   personalNumberValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const year =  control.value && control.value.substring(0,4);
@@ -51,38 +47,4 @@ export class AppComponent {
     }
     return null;
   }
-personalNumberInput(event):void {
-      let temp=JSON.parse(JSON.stringify(this.userDetails.personalNumber));
-      temp=  temp.replace(/\*/g, '');
-      if(!isNaN(temp))
-        this.maskPersonalNumber(this.userDetails.personalNumber)
-        else
-        this.clearData();
-    
-}
-maskPersonalNumber(event):void {
-    if (event.length > 8) {
-        let visibleDigitstemp = 8 - event.length;
-        let maskedSectiontemp = event.slice(visibleDigitstemp);
-        if (maskedSectiontemp){
-          maskedSectiontemp = maskedSectiontemp.replace(/\*/g, '');
-        }
-      
-        if (maskedSectiontemp.length > 0) {
-            this.maskedSectionOriginal = this.maskedSectionOriginal + JSON.parse(JSON.stringify(maskedSectiontemp));
-        }
-    }
-    this.maskedSection = event.slice(8);
-    this.visibleSection = event.slice(0,8);
-    this.userDetails.personalNumber =  this.visibleSection+this.maskedSection.replace(/./g, '*');
-
-    this.ssnNumber =  this.visibleSection+this.maskedSectionOriginal;
-}
-clearData():void {
-    this.maskedSection = "";
-    this.visibleSection = "";
-    this.userDetails.personalNumber = "";
-    this.ssnNumber = "";
-    this.maskedSectionOriginal="";
-}
 }
