@@ -39,10 +39,11 @@ export class AppComponent {
     const year =  control.value && control.value.substring(0,4);
     const month =  control.value && control.value.substring(4,6);
     const day =  control.value && control.value.substring(6,8);
-    const dateRegex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-    const isValidDate = dateRegex.test(year+'-'+month+'-'+day)
-    
-    if (control.value && control.value.length != 12 || !isValidDate) {
+    let dateString = `${year}-${month}-${day}`
+    const regEx = /^\d{4}-\d{2}-\d{2}$/;
+    let d = new Date(dateString);
+    let dNum = d.getTime();  
+    if (control.value && control.value.length != 12 || !dateString.match(regEx) || (!dNum && dNum !== 0) || (d.toISOString().slice(0,10) !== dateString)) {
       return { 'ssnerror': true };
     }
     return null;
