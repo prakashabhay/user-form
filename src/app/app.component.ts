@@ -18,7 +18,7 @@ export class AppComponent {
        Validators.pattern("^[0-9]*$"),
        Validators.minLength(9), Validators.maxLength(10)]],
        name:['', [Validators.required, Validators.minLength(2), Validators.pattern("([a-zA-Z',.-]+( [a-zA-Z',.-]+)*){2,30}")]],
-       email:['',[Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+       email:[''],
        personalNumber:['',[ Validators.required,this.personalNumberValidator]]
    });
   }
